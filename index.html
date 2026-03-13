@@ -2136,11 +2136,81 @@
         }
 
         #google_translate_element_auto {
-            display: none;
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .translate-controls {
+            margin: 18px auto 0;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .translate-controls-title {
+            font-size: 0.82rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .translate-controls-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .translate-select {
+            flex: 1;
+            max-width: 220px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.9rem;
+        }
+
+        .translate-button {
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.2));
+            color: var(--text-white);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .translate-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 255, 136, 0.2);
         }
 
         .goog-te-banner-frame.skiptranslate {
             display: none !important;
+        }
+
+        iframe.goog-te-banner-frame,
+        .goog-te-balloon-frame,
+        #goog-gt-tt,
+        .goog-tooltip,
+        .goog-text-highlight,
+        .goog-logo-link,
+        .goog-te-gadget,
+        .goog-te-gadget-simple {
+            display: none !important;
+            visibility: hidden !important;
         }
 
         body {
@@ -2735,6 +2805,23 @@
                 <div class="trust-badge">
                     <span class="trust-badge-icon">🎂</span>
                     <span>+18 Responsable</span>
+                </div>
+            </div>
+            <div class="translate-controls">
+                <div class="translate-controls-title">Idioma del sitio (predeterminado: español)</div>
+                <div class="translate-controls-row">
+                    <select id="languageSelector" class="translate-select" aria-label="Seleccionar idioma del sitio">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="pt">Português</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="it">Italiano</option>
+                        <option value="ru">Русский</option>
+                        <option value="tr">Türkçe</option>
+                        <option value="ar">العربية</option>
+                    </select>
+                    <button type="button" id="applyLanguageButton" class="translate-button">Aplicar</button>
                 </div>
             </div>
             <p class="footer-text">© 2026 - Oferta sujeta a términos y condiciones. Juega responsablemente. Solo mayores de 18 años. El juego puede ser adictivo.</p>
@@ -3425,44 +3512,112 @@
     </script>
 
     <script>
-        (function autoTranslateByBrowserLanguage() {
+        (function manualLanguagePreference() {
             const sourceLanguage = 'es';
-            const supported = ['en', 'pt', 'fr', 'de', 'it', 'ru', 'tr', 'ar'];
-            const browserLanguage = (navigator.language || sourceLanguage).toLowerCase().split('-')[0];
-            const targetLanguage = supported.includes(browserLanguage) ? browserLanguage : 'en';
+            const supported = ['es', 'en', 'pt', 'fr', 'de', 'it', 'ru', 'tr', 'ar'];
 
-            if (targetLanguage === sourceLanguage) {
-                return;
-            }
+            const languageSelector = document.getElementById('languageSelector');
+            const applyLanguageButton = document.getElementById('applyLanguageButton');
 
-            const cookieValue = '/' + sourceLanguage + '/' + targetLanguage;
-            const cookieMatch = document.cookie.match(/(?:^|; )googtrans=([^;]+)/);
-            const currentValue = cookieMatch ? decodeURIComponent(cookieMatch[1]) : '';
-
-            if (currentValue !== cookieValue) {
+            function setTranslationCookie(targetLanguage) {
+                const cookieValue = '/' + sourceLanguage + '/' + targetLanguage;
                 document.cookie = 'googtrans=' + cookieValue + ';path=/';
                 document.cookie = 'googtrans=' + cookieValue + ';domain=' + location.hostname + ';path=/';
+            }
 
-                if (!sessionStorage.getItem('auto_translate_reload_done')) {
-                    sessionStorage.setItem('auto_translate_reload_done', '1');
-                    location.reload();
+            function clearTranslationCookie() {
+                document.cookie = 'googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+                document.cookie = 'googtrans=;domain=' + location.hostname + ';path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+            }
+
+            function ensureGoogleTranslateScript() {
+                if (window.__googleTranslateLoaded) {
                     return;
+                }
+
+                window.googleTranslateElementInit = function () {
+                    new google.translate.TranslateElement({
+                        pageLanguage: sourceLanguage,
+                        includedLanguages: supported.filter(lang => lang !== sourceLanguage).join(','),
+                        autoDisplay: false,
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    }, 'google_translate_element_auto');
+                };
+
+                const script = document.createElement('script');
+                script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                script.async = true;
+                document.body.appendChild(script);
+                window.__googleTranslateLoaded = true;
+            }
+
+            function applyLanguageWithGoogleCombo(language, onDone) {
+                if (language === sourceLanguage) {
+                    if (typeof onDone === 'function') onDone(true);
+                    return;
+                }
+
+                let tries = 0;
+                const maxTries = 20;
+                const timer = setInterval(function () {
+                    tries += 1;
+                    const combo = document.querySelector('.goog-te-combo');
+
+                    if (combo) {
+                        combo.value = language;
+                        combo.dispatchEvent(new Event('change'));
+                        clearInterval(timer);
+                        if (typeof onDone === 'function') onDone(true);
+                        return;
+                    }
+
+                    if (tries >= maxTries) {
+                        clearInterval(timer);
+                        if (typeof onDone === 'function') onDone(false);
+                    }
+                }, 250);
+            }
+
+            function applyLanguagePreference(language, shouldReload) {
+                if (!supported.includes(language)) {
+                    return;
+                }
+
+                if (language === sourceLanguage) {
+                    clearTranslationCookie();
+                } else {
+                    setTranslationCookie(language);
+                }
+
+                if (shouldReload) {
+                    location.reload();
                 }
             }
 
-            window.googleTranslateElementInit = function () {
-                new google.translate.TranslateElement({
-                    pageLanguage: sourceLanguage,
-                    includedLanguages: supported.join(','),
-                    autoDisplay: false,
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-                }, 'google_translate_element_auto');
-            };
+            // Siempre iniciar en espanol y sin traduccion automatica.
+            clearTranslationCookie();
+            if (languageSelector) {
+                languageSelector.value = sourceLanguage;
+            }
 
-            const script = document.createElement('script');
-            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-            script.async = true;
-            document.body.appendChild(script);
+            if (applyLanguageButton && languageSelector) {
+                applyLanguageButton.addEventListener('click', function () {
+                    const selected = languageSelector.value;
+                    applyLanguagePreference(selected, false);
+
+                    if (selected === sourceLanguage) {
+                        location.reload();
+                        return;
+                    }
+
+                    ensureGoogleTranslateScript();
+                    applyLanguageWithGoogleCombo(selected, function (ok) {
+                        if (!ok) {
+                            location.reload();
+                        }
+                    });
+                });
+            }
         })();
     </script>
 </body>
