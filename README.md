@@ -41,11 +41,16 @@ Además, la sección Coolbet incluye 3 banners oficiales servidos por iframe (ad
 
 ## ¿Qué incluye la landing?
 
-- Diseño responsivo, tema neón oscuro y animaciones CSS.
-- **Oferta principal: Coolbet** — sección "La Fiesta del Fútbol 2026" con banners clickeables (deportes y casino), primera en la página y en el CTA fijo de móvil.
-- Alternativas: bono 1win (opción 2) y referido Stake (opción 3).
-- Secciones: oferta, countdown, juegos, ganadores, niveles de bono, FAQ, testimonios, footer.
-- Selector de idioma manual (Google Translate, español por defecto).
+La página funciona con **pestañas por plataforma** (navbar fija con hash routing). Cada pestaña tiene URL propia para compartir en campañas:
+
+| Pestaña | Link directo | Contenido |
+|---|---|---|
+| 🐻 Coolbet ⭐ (por defecto) | `/#coolbet` | Oferta Mundial 2026, CTAs deportes/casino, banners oficiales, FAQ propio |
+| 🎁 1win | `/#1win` | Bono +500%, countdown, juegos, ganadores, niveles, FAQ, testimonios |
+| 🎲 Stake | `/#stake` | Referido directo + características (crypto, originals) |
+| ⚽ Mundial 2026 | `/#mundial` | Cuenta regresiva real a la Gran Final (19-jul-2026), banners verticales |
+
+Además: diseño responsivo tema neón, CTA fijo de móvil hacia Coolbet, y selector de idioma manual (español por defecto).
 
 ## Despliegue
 

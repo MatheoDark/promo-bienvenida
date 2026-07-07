@@ -103,53 +103,104 @@
             padding-top: 76px;
         }
 
-        .progress-fixed {
+        .tab-nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 12000;
-            background: rgba(5, 8, 16, 0.92);
+            display: flex;
+            justify-content: flex-start;
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(5, 8, 16, 0.94);
             border-bottom: 1px solid rgba(0, 255, 136, 0.25);
             backdrop-filter: blur(10px);
-            padding: 10px 14px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
 
-        .progress-track {
-            width: min(680px, 100%);
-            margin: 0 auto;
+        .tab-nav::-webkit-scrollbar {
+            display: none;
         }
 
-        .progress-text {
-            font-size: 0.82rem;
+        @media (min-width: 700px) {
+            .tab-nav {
+                justify-content: center;
+            }
+        }
+
+        .tab-nav button {
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-light);
-            margin-bottom: 8px;
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-        }
-
-        .progress-line {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 18px;
             border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .tab-nav button:hover {
+            border-color: rgba(0, 255, 136, 0.5);
+        }
+
+        .tab-nav button.active {
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+            color: #021209;
+            border-color: transparent;
+            box-shadow: 0 6px 18px rgba(0, 212, 255, 0.35);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeInUp 0.45s ease-out;
+        }
+
+        .wc-countdown {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 18px 0 22px;
+        }
+
+        .coolbet-tall-banners {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        .coolbet-tall-banners a {
+            display: block;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .progress-fill {
-            width: 80%;
-            height: 100%;
-            background: linear-gradient(90deg, #00ff88, #00d4ff, #a855f7);
-            background-size: 180% 180%;
-            animation: progressShimmer 2.2s linear infinite;
-            transition: width 0.45s ease;
-            will-change: transform, opacity;
+        .coolbet-tall-banners a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(255, 215, 0, 0.22);
         }
 
-        @keyframes progressShimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        .coolbet-tall-banners img {
+            display: block;
+            max-width: 100%;
+            height: auto;
         }
         
         /* Animated Background */
@@ -2430,14 +2481,12 @@
 <body>
     <div id="google_translate_element_auto"></div>
 
-    <div class="progress-fixed">
-        <div class="progress-track">
-            <div class="progress-text" id="progressText">Tu bono está casi listo. Paso final requerido</div>
-            <div class="progress-line">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-        </div>
-    </div>
+    <nav class="tab-nav" id="tabNav" aria-label="Plataformas">
+        <button type="button" data-tab="coolbet" class="active">🐻 Coolbet ⭐</button>
+        <button type="button" data-tab="1win">🎁 1win</button>
+        <button type="button" data-tab="stake">🎲 Stake</button>
+        <button type="button" data-tab="mundial">⚽ Mundial 2026</button>
+    </nav>
 
     <!-- Background Animation -->
     <div class="bg-animation"></div>
@@ -2484,8 +2533,9 @@
             <p class="subtitle">Has sido seleccionado para recibir una oferta especial que no está disponible para el público general</p>
         </header>
 
-        <!-- OFERTA PRINCIPAL: Coolbet - Especial Mundial 2026 -->
-        <section class="coolbet-section" id="coolbet">
+        <!-- PESTAÑA COOLBET (principal) -->
+        <div class="tab-panel active" id="panel-coolbet">
+        <section class="coolbet-section">
             <div class="coolbet-tag">⭐ Oferta Principal · Coolbet Chile</div>
             <img src="media/coolbet/coolbet-logo.png" alt="Coolbet" class="coolbet-logo">
             <div class="coolbet-title">La Fiesta del Fútbol <span>2026</span></div>
@@ -2524,10 +2574,65 @@
             </div>
         </section>
 
+        <div class="faq-section">
+            <div class="faq-title">❓ Preguntas Frecuentes · Coolbet</div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question-text">¿Cómo obtengo los $15.000 de apuesta gratis?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Regístrate en Coolbet desde cualquiera de los botones de esta página. La apuesta gratis de $15.000 y el bono del 100% en tu primer depósito se activan según los términos vigentes de la promoción para Chile.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question-text">¿Coolbet es seguro y legal?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Coolbet opera con licencia de la Malta Gaming Authority (MGA), una de las más exigentes de la industria, y promueve el juego responsable. Solo para mayores de 18 años.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question-text">¿Puedo usar el bono en el casino?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Sí. Además de las apuestas deportivas, Coolbet tiene casino con slots, ruleta, blackjack y juegos en vivo. Usa el botón "Jugar en Casino" para registrarte directo en esa sección.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span class="faq-question-text">¿Qué tiene de especial para el Mundial 2026?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Coolbet preparó promociones especiales para "La Fiesta del Fútbol 2026". Revisa la pestaña Mundial 2026 de esta página para ver la cuenta regresiva y las ofertas del torneo.
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- /panel-coolbet -->
+
+        <!-- PESTAÑA 1WIN -->
+        <div class="tab-panel" id="panel-1win">
         <section class="offer-box">
             <div class="offer-glow"></div>
             <div class="offer-content">
-                <div class="offer-label">Opción 2 · Bono de Bienvenida 1win</div>
+                <div class="offer-label">Bono de Bienvenida 1win</div>
                 <div class="reveal-stage" id="revealStage">
                     <div class="reveal-helper">Haz clic para revelar tu código y desbloquear el bono completo</div>
                     <button class="reveal-button" id="revealBonusButton" type="button">Revelar Código</button>
@@ -2585,7 +2690,7 @@
         </div>
         
         <div class="secondary-cta-container primary-1win">
-            <div class="secondary-cta-label">Opción 2: Bono de bienvenida 1win</div>
+            <div class="secondary-cta-label">Bono de bienvenida 1win</div>
             <div class="cta-container">
                 <a href="https://1wjsit.life/?open=register&p=3w9p" class="cta-button" id="ctaButton">
                     <span class="cta-brand-stack">
@@ -2597,15 +2702,6 @@
             </div>
         </div>
 
-        <div class="secondary-cta-container">
-            <div class="secondary-cta-label">Opción 3: Referido directo de Stake</div>
-            <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/3c26c872f52150b3c84ade21ea9058c2ac8a8e66/media/stake-full.tLL7usOz.svg" alt="Stake" class="secondary-cta-logo">
-            <a href="https://stake.com/?c=3UsGeLgH" class="cta-button cta-button-stake" id="ctaButtonStake" target="_blank" rel="noopener noreferrer nofollow">
-                <span class="cta-button-icon">🎯</span>
-                <span class="cta-button-text">ABRIR BONO STAKE</span>
-            </a>
-        </div>
-        
         <div class="cta-subtext">
             🔒 Registro en 30 segundos • <span>100% Seguro</span> • Sin costos ocultos
         </div>
@@ -2818,14 +2914,6 @@
             </div>
         </div>
         
-        <!-- Banner intermedio Coolbet -->
-        <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c=" class="coolbet-strip" target="_blank" rel="noopener noreferrer nofollow">
-            <picture>
-                <source media="(min-width: 560px)" srcset="media/coolbet/coolbet-mundial-2026-728x90.jpg">
-                <img src="media/coolbet/coolbet-mundial-2026-320x100.jpg" alt="Coolbet Mundial 2026 - Regístrate ahora y recibe $15.000 de apuesta gratis" loading="lazy">
-            </picture>
-        </a>
-
         <div class="features">
             <div class="feature-card">
                 <span class="feature-icon">⚡</span>
@@ -3010,6 +3098,101 @@
             </a>
         </div>
         
+        </div><!-- /panel-1win -->
+
+        <!-- PESTAÑA STAKE -->
+        <div class="tab-panel" id="panel-stake">
+            <div class="secondary-cta-container">
+                <div class="secondary-cta-label">Referido directo de Stake</div>
+                <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/3c26c872f52150b3c84ade21ea9058c2ac8a8e66/media/stake-full.tLL7usOz.svg" alt="Stake" class="secondary-cta-logo">
+                <a href="https://stake.com/?c=3UsGeLgH" class="cta-button cta-button-stake" id="ctaButtonStake" target="_blank" rel="noopener noreferrer nofollow">
+                    <span class="cta-button-icon">🎯</span>
+                    <span class="cta-button-text">ABRIR BONO STAKE</span>
+                </a>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <span class="feature-icon">₿</span>
+                    <div class="feature-title">Crypto Friendly</div>
+                    <div class="feature-text">Deposita y retira con Bitcoin, Ethereum, USDT y más</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎲</span>
+                    <div class="feature-title">Juegos Originales</div>
+                    <div class="feature-text">Plinko, Mines, Crash y los clásicos exclusivos de Stake</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <div class="feature-title">Retiros Instantáneos</div>
+                    <div class="feature-text">Las criptomonedas llegan a tu wallet en minutos</div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🏆</span>
+                    <div class="feature-title">Apuestas en Vivo</div>
+                    <div class="feature-text">Deportes, eSports y eventos especiales en tiempo real</div>
+                </div>
+            </div>
+        </div><!-- /panel-stake -->
+
+        <!-- PESTAÑA MUNDIAL 2026 -->
+        <div class="tab-panel" id="panel-mundial">
+            <section class="coolbet-section">
+                <div class="coolbet-tag">🔴 El Mundial está EN VIVO</div>
+                <div class="coolbet-title">Mundial <span>2026</span> · Fase Final</div>
+                <p class="coolbet-subtitle">El torneo más grande de la historia se está jugando ahora en Norteamérica. Apuesta en vivo las eliminatorias y la Gran Final del 19 de julio con $15.000 gratis de Coolbet 🇨🇱</p>
+
+                <div class="coolbet-banners-title" style="margin-bottom: 4px;">Cuenta regresiva a la Gran Final</div>
+                <div class="wc-countdown">
+                    <div class="second-cta-timebox">
+                        <span class="second-cta-timevalue" id="wcDays">--</span>
+                        <span class="second-cta-timelabel">Días</span>
+                    </div>
+                    <div class="second-cta-timebox">
+                        <span class="second-cta-timevalue" id="wcHours">--</span>
+                        <span class="second-cta-timelabel">Horas</span>
+                    </div>
+                    <div class="second-cta-timebox">
+                        <span class="second-cta-timevalue" id="wcMins">--</span>
+                        <span class="second-cta-timelabel">Min</span>
+                    </div>
+                    <div class="second-cta-timebox">
+                        <span class="second-cta-timevalue" id="wcSecs">--</span>
+                        <span class="second-cta-timelabel">Seg</span>
+                    </div>
+                </div>
+
+                <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c=" class="coolbet-hero-banner" target="_blank" rel="noopener noreferrer nofollow">
+                    <picture>
+                        <source media="(min-width: 560px)" srcset="media/coolbet/coolbet-mundial-2026-728x90.jpg">
+                        <img src="media/coolbet/coolbet-mundial-2026-320x100.jpg" alt="Coolbet Mundial 2026 - Regístrate ahora y recibe $15.000 de apuesta gratis" loading="lazy">
+                    </picture>
+                </a>
+
+                <div class="coolbet-cta-row">
+                    <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c=" class="cta-button cta-button-coolbet" target="_blank" rel="noopener noreferrer nofollow">
+                        <span class="cta-button-icon">⚽</span>
+                        <span class="cta-button-text">Apostar al Mundial</span>
+                    </a>
+                    <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_125c_&affid=935&siteid=3299&adid=125&c=" class="cta-button cta-button-coolbet casino" target="_blank" rel="noopener noreferrer nofollow">
+                        <span class="cta-button-icon">🎰</span>
+                        <span class="cta-button-text">Casino Coolbet</span>
+                    </a>
+                </div>
+
+                <div class="coolbet-tall-banners">
+                    <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c=" target="_blank" rel="noopener noreferrer nofollow">
+                        <img src="media/coolbet/coolbet-mundial-2026-300x600.jpg" alt="Coolbet Mundial 2026 - $15.000 apuesta gratis" width="300" height="600" loading="lazy">
+                    </a>
+                    <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_125c_&affid=935&siteid=3299&adid=125&c=" target="_blank" rel="noopener noreferrer nofollow">
+                        <img src="media/coolbet/coolbet-mundial-2026-160x600.jpg" alt="Coolbet Casino - Bono de bienvenida" width="160" height="600" loading="lazy">
+                    </a>
+                </div>
+
+                <div class="coolbet-note">🔒 Licencia MGA • Solo +18 • Juega responsablemente</div>
+            </section>
+        </div><!-- /panel-mundial -->
+
         <div class="payment-section">
             <div class="payment-title">💳 Métodos de Pago Aceptados</div>
             <div class="payment-methods">
@@ -3744,6 +3927,69 @@
 
         // Cargar carrusel cuando se abre la página
         document.addEventListener('DOMContentLoaded', initCarousel);
+    </script>
+
+    <script>
+        // Navegación por pestañas con hash routing (#coolbet, #1win, #stake, #mundial)
+        (function tabNavigation() {
+            const validTabs = ['coolbet', '1win', 'stake', 'mundial'];
+            const buttons = document.querySelectorAll('.tab-nav button');
+
+            function showTab(name, updateHash) {
+                if (!validTabs.includes(name)) {
+                    name = 'coolbet';
+                }
+
+                document.querySelectorAll('.tab-panel').forEach(panel => {
+                    panel.classList.toggle('active', panel.id === 'panel-' + name);
+                });
+                buttons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.tab === name);
+                });
+
+                if (updateHash) {
+                    history.replaceState(null, '', '#' + name);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => showTab(btn.dataset.tab, true));
+            });
+
+            window.addEventListener('hashchange', () => showTab(location.hash.slice(1), false));
+
+            showTab(location.hash.slice(1) || 'coolbet', false);
+        })();
+
+        // Cuenta regresiva real a la Gran Final del Mundial 2026 (19 de julio, MetLife Stadium)
+        (function worldCupCountdown() {
+            const daysEl = document.getElementById('wcDays');
+            const hoursEl = document.getElementById('wcHours');
+            const minsEl = document.getElementById('wcMins');
+            const secsEl = document.getElementById('wcSecs');
+            if (!daysEl) return;
+
+            const kickoff = new Date('2026-07-19T15:00:00-04:00').getTime();
+
+            function update() {
+                const distance = kickoff - Date.now();
+                if (distance <= 0) {
+                    daysEl.textContent = '00';
+                    hoursEl.textContent = '00';
+                    minsEl.textContent = '00';
+                    secsEl.textContent = '00';
+                    return;
+                }
+                daysEl.textContent = String(Math.floor(distance / 86400000));
+                hoursEl.textContent = String(Math.floor((distance % 86400000) / 3600000)).padStart(2, '0');
+                minsEl.textContent = String(Math.floor((distance % 3600000) / 60000)).padStart(2, '0');
+                secsEl.textContent = String(Math.floor((distance % 60000) / 1000)).padStart(2, '0');
+            }
+
+            update();
+            setInterval(update, 1000);
+        })();
     </script>
 
     <script>
