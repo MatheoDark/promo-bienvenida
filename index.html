@@ -2033,6 +2033,20 @@
             pointer-events: none;
         }
 
+        .coolbet-logo {
+            width: 150px;
+            max-width: 50vw;
+            height: auto;
+            display: block;
+            margin: 0 auto 12px;
+            position: relative;
+            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+        }
+
+        .coolbet-loader-logo {
+            border-radius: 0;
+        }
+
         .coolbet-tag {
             display: inline-block;
             background: rgba(255, 215, 0, 0.15);
@@ -2176,9 +2190,23 @@
         }
 
         .footer-logo-img.coolbet {
-            width: 150px;
-            border-radius: 8px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.35));
+            width: 130px;
+            border-radius: 0;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
+        }
+
+        .primary-1win {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.14), rgba(15, 23, 42, 0.82));
+            border-color: rgba(0, 255, 136, 0.38);
+            box-shadow: 0 14px 36px rgba(0, 255, 136, 0.14);
+        }
+
+        .primary-1win .secondary-cta-label {
+            color: #86efac;
+        }
+
+        .primary-1win .cta-container {
+            margin: 0;
         }
 
         /* Confetti Canvas */
@@ -2423,7 +2451,7 @@
     <!-- Loader -->
     <div id="loader">
         <div class="loader-container">
-            <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/refs/heads/main/media/Logo.jpeg" alt="1WIN Logo" class="loader-logo-img">
+            <img src="media/coolbet/coolbet-logo.png" alt="Coolbet Logo" class="loader-logo-img coolbet-loader-logo">
             <div class="loader-spinner"></div>
             <div class="loader-progress">
                 <div class="loader-progress-bar"></div>
@@ -2459,6 +2487,7 @@
         <!-- OFERTA PRINCIPAL: Coolbet - Especial Mundial 2026 -->
         <section class="coolbet-section" id="coolbet">
             <div class="coolbet-tag">⭐ Oferta Principal · Coolbet Chile</div>
+            <img src="media/coolbet/coolbet-logo.png" alt="Coolbet" class="coolbet-logo">
             <div class="coolbet-title">La Fiesta del Fútbol <span>2026</span></div>
             <p class="coolbet-subtitle">$15.000 de apuesta gratis + 100% en tu primer depósito. Prepárate para el Mundial 2026 con Coolbet 🇨🇱</p>
 
@@ -2555,16 +2584,17 @@
             </div>
         </div>
         
-        <div class="cta-container">
-            <span class="cta-arrows left">👉</span>
-            <a href="https://1wjsit.life/?open=register&p=3w9p" class="cta-button" id="ctaButton">
-                <span class="cta-brand-stack">
-                    <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/refs/heads/main/media/Logo.jpeg" alt="1WIN" class="cta-brand-logo">
-                    <span class="cta-brand-caption">Reclamar bono de 1win</span>
-                    <span class="cta-brand-code">Codigo: WINCLP</span>
-                </span>
-            </a>
-            <span class="cta-arrows right">👈</span>
+        <div class="secondary-cta-container primary-1win">
+            <div class="secondary-cta-label">Opción 2: Bono de bienvenida 1win</div>
+            <div class="cta-container">
+                <a href="https://1wjsit.life/?open=register&p=3w9p" class="cta-button" id="ctaButton">
+                    <span class="cta-brand-stack">
+                        <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/refs/heads/main/media/Logo.jpeg" alt="1WIN" class="cta-brand-logo">
+                        <span class="cta-brand-caption">Reclamar bono de 1win</span>
+                        <span class="cta-brand-code">Codigo: WINCLP</span>
+                    </span>
+                </a>
+            </div>
         </div>
 
         <div class="secondary-cta-container">
@@ -2995,7 +3025,7 @@
                 <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/refs/heads/main/media/Logo.jpeg" alt="1WIN Logo" class="footer-logo-img">
                 <img src="https://raw.githubusercontent.com/MatheoDark/promo-bienvenida/3c26c872f52150b3c84ade21ea9058c2ac8a8e66/media/stake-full.tLL7usOz.svg" alt="Stake Logo" class="footer-logo-img stake">
                 <a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c=" target="_blank" rel="noopener noreferrer nofollow">
-                    <img src="media/coolbet/coolbet-mundial-2026-300x100.jpg" alt="Coolbet" class="footer-logo-img coolbet" loading="lazy">
+                    <img src="media/coolbet/coolbet-logo.png" alt="Coolbet" class="footer-logo-img coolbet" loading="lazy">
                 </a>
             </div>
             <div class="trust-badges">

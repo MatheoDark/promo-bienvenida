@@ -23,8 +23,9 @@ promo-bienvenida/
 └── media/
     ├── Logo.jpeg                   # Logo 1win
     ├── stake-full.tLL7usOz.svg     # Logo Stake
-    └── coolbet/                    # Banners Mundial 2026 (Chile) en varios tamaños
-        └── coolbet-mundial-2026-{ancho}x{alto}.jpg
+    └── coolbet/                    # Marca y banners de Coolbet
+        ├── coolbet-logo.png        # Logo oficial (usado en loader, sección y footer)
+        └── coolbet-mundial-2026-{ancho}x{alto}.jpg  # Banners Mundial 2026 (Chile)
 ```
 
 ## Enlaces de afiliado activos
