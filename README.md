@@ -43,6 +43,7 @@ Además, la sección Coolbet incluye 3 banners oficiales servidos por iframe (ad
 > 1. Los nombres de las imágenes locales evitan patrones de tamaño de banner (`728x90`, `300x250`...) que EasyList filtra por nombre de archivo.
 > 2. Los enlaces de Coolbet **no van en el HTML**: EasyList oculta cualquier elemento con `href` hacia `adsrv.eacdn.com`. Se usan `<a href="#" data-cb="sb|ca">` y la URL se construye en JavaScript al hacer click (función `cbUrl` en index.html).
 > 3. Si un bloqueador colapsa los iframes oficiales, un script los reemplaza por banners locales con el mismo enlace de registro.
+> 4. El bloqueo estricto de uBlock también impide **navegar** al ad-server (filtro `||eacdn.com^`). Al cargar la página se sondea el dominio: si está bloqueado, los clicks van directo a `https://www.coolbetchile.com/cl/casa-de-futbol?btag=...&affid=935` (destino real del redirect, conserva la atribución); si no, pasan por `C.ashx` para que el click cuente en PartnerMatrix.
 
 ## ¿Qué incluye la landing?
 

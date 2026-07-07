@@ -3965,11 +3965,28 @@
         // Los enlaces de Coolbet se arman en runtime: si la URL del ad-server
         // aparece literal en un href, los filtros cosméticos de uBlock/EasyList
         // ocultan el elemento completo (botones y banners incluidos).
+        // Además, el bloqueo estricto de uBlock impide NAVEGAR al ad-server,
+        // así que se sondea al cargar: con bloqueador activo, el click va
+        // directo al sitio del operador conservando btag/affid (la atribución
+        // del afiliado se mantiene); sin bloqueador, pasa por el ad-server
+        // para que el click cuente en el dashboard de PartnerMatrix.
         (function coolbetLinks() {
+            const adHost = ['https://wlcoolbet', 'adsrv', 'eacdn', 'com'].join('.');
+            let blockerActive = false;
+
+            try {
+                fetch(adHost + '/favicon.ico', { mode: 'no-cors', cache: 'no-store' })
+                    .catch(() => { blockerActive = true; });
+            } catch (e) {
+                blockerActive = true;
+            }
+
             function cbUrl(kind) {
                 const adid = kind === 'ca' ? '125' : '124';
-                const host = ['https://wlcoolbet', 'adsrv', 'eacdn', 'com'].join('.');
-                return host + '/C.ashx?btag=a_3299b_' + adid + 'c_&affid=935&siteid=3299&adid=' + adid + '&c=';
+                if (blockerActive) {
+                    return 'https://www.coolbetchile.com/cl/casa-de-futbol?btag=a_3299b_' + adid + 'c_&affid=935&utm_source=affiliate&utm_campaign=935';
+                }
+                return adHost + '/C.ashx?btag=a_3299b_' + adid + 'c_&affid=935&siteid=3299&adid=' + adid + '&c=';
             }
 
             function bind(root) {
