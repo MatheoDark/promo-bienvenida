@@ -43,7 +43,7 @@ Además, la sección Coolbet incluye 3 banners oficiales servidos por iframe (ad
 > 1. Los nombres de las imágenes locales evitan patrones de tamaño de banner (`728x90`, `300x250`...) que EasyList filtra por nombre de archivo.
 > 2. Los enlaces de Coolbet **no van en el HTML**: EasyList oculta cualquier elemento con `href` hacia `adsrv.eacdn.com`. Se usan `<a href="#" data-cb="sb|ca">` y la URL se construye en JavaScript al hacer click (función `cbUrl` en index.html).
 > 3. Si un bloqueador colapsa los iframes oficiales, un script los reemplaza por banners locales con el mismo enlace de registro.
-> 4. El bloqueo estricto de uBlock también impide **navegar** al ad-server (filtro `||eacdn.com^`). Al cargar la página se sondea el dominio: si está bloqueado, los clicks van directo a `https://www.coolbetchile.com/cl/casa-de-futbol?btag=...&affid=935` (destino real del redirect, conserva la atribución); si no, pasan por `C.ashx` para que el click cuente en PartnerMatrix.
+> 4. El click **siempre** navega por `C.ashx` (redirect del ad-server). Ese paso es el que atribuye el registro en PartnerMatrix; ir directo a `coolbetchile.com` con el `btag` en la URL **no acredita la comisión**. Por eso no se esquiva ese salto, aunque el bloqueo estricto de uBlock (filtro `||eacdn.com^`) muestre una advertencia al usuario. La solución real a esa advertencia es pedirle a Coolbet un **dominio de tracking alternativo / safe link** que no esté en las listas de filtros (EveryMatrix suele ofrecerlos).
 
 ## ¿Qué incluye la landing?
 
