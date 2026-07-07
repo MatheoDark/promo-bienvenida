@@ -39,7 +39,10 @@ promo-bienvenida/
 
 Además, la sección Coolbet incluye 3 banners oficiales servidos por iframe (adid 253 · 728x90, adid 255 · 320x160, adid 264 · 300x250) desde `wlcoolbet.adsrv.eacdn.com/I.ashx`.
 
-> **Nota anti-adblock**: los nombres de las imágenes locales evitan patrones de tamaño de banner (`728x90`, `300x250`, etc.) que uBlock/EasyList filtran. Si un bloqueador corta los iframes oficiales, un script los reemplaza automáticamente por banners locales que apuntan al mismo enlace de registro. No renombrar las imágenes con medidas en el nombre.
+> **Nota anti-adblock** (no deshacer estas decisiones):
+> 1. Los nombres de las imágenes locales evitan patrones de tamaño de banner (`728x90`, `300x250`...) que EasyList filtra por nombre de archivo.
+> 2. Los enlaces de Coolbet **no van en el HTML**: EasyList oculta cualquier elemento con `href` hacia `adsrv.eacdn.com`. Se usan `<a href="#" data-cb="sb|ca">` y la URL se construye en JavaScript al hacer click (función `cbUrl` en index.html).
+> 3. Si un bloqueador colapsa los iframes oficiales, un script los reemplaza por banners locales con el mismo enlace de registro.
 
 ## ¿Qué incluye la landing?
 
