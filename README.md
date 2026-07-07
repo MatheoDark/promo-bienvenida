@@ -25,7 +25,7 @@ promo-bienvenida/
     ├── stake-full.tLL7usOz.svg     # Logo Stake
     └── coolbet/                    # Marca y banners de Coolbet
         ├── coolbet-logo.png        # Logo oficial (usado en loader, sección y footer)
-        └── coolbet-mundial-2026-{ancho}x{alto}.jpg  # Banners Mundial 2026 (Chile)
+        └── coolbet-fiesta-*.jpg    # Banners Mundial 2026 (hero, franja, vertical, torre...)
 ```
 
 ## Enlaces de afiliado activos
@@ -38,6 +38,8 @@ promo-bienvenida/
 | Stake | Referido — opción 3 | `https://stake.com/?c=3UsGeLgH` |
 
 Además, la sección Coolbet incluye 3 banners oficiales servidos por iframe (adid 253 · 728x90, adid 255 · 320x160, adid 264 · 300x250) desde `wlcoolbet.adsrv.eacdn.com/I.ashx`.
+
+> **Nota anti-adblock**: los nombres de las imágenes locales evitan patrones de tamaño de banner (`728x90`, `300x250`, etc.) que uBlock/EasyList filtran. Si un bloqueador corta los iframes oficiales, un script los reemplaza automáticamente por banners locales que apuntan al mismo enlace de registro. No renombrar las imágenes con medidas en el nombre.
 
 ## ¿Qué incluye la landing?
 
