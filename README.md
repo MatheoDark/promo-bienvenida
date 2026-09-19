@@ -8,7 +8,7 @@
 Landing promocional con estilo moderno, animaciones y CTAs optimizados para campañas de afiliados (1win, Stake y Coolbet).
 
 <p align="center">
-	<a href="https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c="><img alt="APUESTA GRATIS $15.000" src="https://img.shields.io/badge/⚽-APUESTA%20GRATIS%20%2415.000-brightgreen?style=for-the-badge" /></a>
+	<a href="https://partners.coolbetaffiliates.com/visit/?bta=935&nci=5351"><img alt="APUESTA GRATIS $15.000" src="https://img.shields.io/badge/⚽-APUESTA%20GRATIS%20%2415.000-brightgreen?style=for-the-badge" /></a>
 	&nbsp;
 	<a href="https://github.com/MatheoDark/promo-bienvenida"><img alt="Repo" src="https://img.shields.io/badge/Repo-MatheoDark-blue?style=for-the-badge" /></a>
 </p>
@@ -32,18 +32,17 @@ promo-bienvenida/
 
 | Plataforma | Producto | Enlace |
 |---|---|---|
-| **Coolbet** ⭐ principal | Sportsbook CL (adid 124) | `https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_124c_&affid=935&siteid=3299&adid=124&c=` |
-| **Coolbet** ⭐ principal | Casino CL (adid 125) | `https://wlcoolbet.adsrv.eacdn.com/C.ashx?btag=a_3299b_125c_&affid=935&siteid=3299&adid=125&c=` |
+| **Coolbet** ⭐ principal | CHILE_FDB_Generic (ID 5351) → bono bienvenida · usado en botones y banners | `https://partners.coolbetaffiliates.com/visit/?bta=935&nci=5351` |
+| **Coolbet** | CHILE_Homepage (ID 5366) → deportes · reserva | `https://partners.coolbetaffiliates.com/visit/?bta=935&nci=5366` |
 | 1win | Registro (código `WINCLP`) — opción 2 | `https://1wjsit.life/?open=register&p=3w9p` |
 | Stake | Referido — opción 3 | `https://stake.com/?c=3UsGeLgH` |
 
-Además, la sección Coolbet incluye 3 banners oficiales servidos por iframe (adid 253 · 728x90, adid 255 · 320x160, adid 264 · 300x250) desde `wlcoolbet.adsrv.eacdn.com/I.ashx`.
+Coolbet migró a **Cellxpert** (panel `partners.coolbetaffiliates.com`, afiliado ID 935) en septiembre de 2026. Los links antiguos de `wlcoolbet.adsrv.eacdn.com` (`C.ashx` / `I.ashx`) **ya no funcionan**. Los banners de la sección Coolbet son imágenes locales enlazadas al link de tracking.
 
 > **Nota anti-adblock** (no deshacer estas decisiones):
 > 1. Los nombres de las imágenes locales evitan patrones de tamaño de banner (`728x90`, `300x250`...) que EasyList filtra por nombre de archivo.
-> 2. Los enlaces de Coolbet **no van en el HTML**: EasyList oculta cualquier elemento con `href` hacia `adsrv.eacdn.com`. Se usan `<a href="#" data-cb="sb|ca">` y la URL se construye en JavaScript al hacer click (función `cbUrl` en index.html).
-> 3. Si un bloqueador colapsa los iframes oficiales, un script los reemplaza por banners locales con el mismo enlace de registro.
-> 4. El click **siempre** navega por `C.ashx` (redirect del ad-server). Ese paso es el que atribuye el registro en PartnerMatrix; ir directo a `coolbetchile.com` con el `btag` en la URL **no acredita la comisión**. Por eso no se esquiva ese salto, aunque el bloqueo estricto de uBlock (filtro `||eacdn.com^`) muestre una advertencia al usuario. La solución real a esa advertencia es pedirle a Coolbet un **dominio de tracking alternativo / safe link** que no esté en las listas de filtros (EveryMatrix suele ofrecerlos).
+> 2. Los enlaces de Coolbet **no van en el HTML**: se usan `<a href="#" data-cb="sb|ca">` y la URL se construye en JavaScript al hacer click (función `cbUrl` en index.html), así los filtros cosméticos no ocultan los elementos.
+> 3. El click **siempre** navega por `/visit/` de Cellxpert. Ese redirect es el que atribuye el registro; ir directo a `apuestacoolbet.com` **no acredita la comisión**.
 
 ## ¿Qué incluye la landing?
 
