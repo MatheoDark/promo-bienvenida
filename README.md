@@ -25,7 +25,7 @@ promo-bienvenida/
     ├── stake-full.tLL7usOz.svg     # Logo Stake
     └── coolbet/                    # Marca y banners de Coolbet
         ├── coolbet-logo.png        # Logo oficial (usado en loader, sección y footer)
-        └── coolbet-fiesta-*.jpg    # Banners Mundial 2026 (hero, franja, vertical, torre...)
+        └── coolbet-fiesta-*.jpg    # Banners "Fiesta del Fútbol 2026" (hero, franja, vertical, torre...)
 ```
 
 ## Enlaces de afiliado activos
@@ -50,10 +50,9 @@ La página funciona con **pestañas por plataforma** (navbar fija con hash routi
 
 | Pestaña | Link directo | Contenido |
 |---|---|---|
-| 🐻 Coolbet ⭐ (por defecto) | `/#coolbet` | Oferta Mundial 2026, CTAs deportes/casino, banners oficiales, FAQ propio |
+| 🐻 Coolbet ⭐ (por defecto) | `/#coolbet` | Bono de bienvenida, CTAs deportes/casino, banners oficiales, FAQ propio |
 | 🎁 1win | `/#1win` | Bono +500%, countdown, juegos, ganadores, niveles, FAQ, testimonios |
 | 🎲 Stake | `/#stake` | Referido directo + características (crypto, originals) |
-| ⚽ Mundial 2026 | `/#mundial` | Cuenta regresiva real a la Gran Final (19-jul-2026), banners verticales |
 
 Además: diseño responsivo tema neón, CTA fijo de móvil hacia Coolbet, y selector de idioma manual (español por defecto).
 
@@ -73,4 +72,4 @@ Además: diseño responsivo tema neón, CTA fijo de móvil hacia Coolbet, y sele
 - Solo para mayores de 18 años. Juega responsablemente.
 
 ---
-_Hecho por MatheoDark — último cambio: integración Coolbet Mundial 2026_
+_Hecho por MatheoDark — último cambio: migración a Cellxpert y fin de la campaña Mundial 2026_
